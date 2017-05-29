@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/skru-project.iml" filepath="$PROJECT_DIR$/skru-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/skru_dane_po_warszawsku.iml" filepath="$PROJECT_DIR$/skru_dane_po_warszawsku.iml" />
     </modules>
   </component>
 </project>
