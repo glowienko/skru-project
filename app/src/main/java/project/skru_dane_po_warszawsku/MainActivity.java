@@ -13,6 +13,8 @@ import project.skru_dane_po_warszawsku.network.HTTPGetRequest;
 import project.skru_dane_po_warszawsku.network.RequestCallback;
 
 
+import project.skru_dane_po_warszawsku.Location.CurrentLocation;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String UM_APIKEY = "82176bbc-f673-493b-9574-b9385220056b";
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CurrentLocation currentLocation = new CurrentLocation(this);
+        currentLocation.getLocation();
 
         Button btnTest = (Button) findViewById(R.id.btnTest);
         btnTest.setOnClickListener(new View.OnClickListener() {
