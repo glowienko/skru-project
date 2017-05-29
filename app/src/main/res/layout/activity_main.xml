@@ -7,5 +7,12 @@
     tools:context="project.skru_dane_po_warszawsku.MainActivity">
 
 
-
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Test pobierania" />
 </android.widget.RelativeLayout>

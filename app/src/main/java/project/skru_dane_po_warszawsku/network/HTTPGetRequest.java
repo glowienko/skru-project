@@ -88,6 +88,10 @@ public class HTTPGetRequest extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        mCallback.updateFromResponse(s);
+        try {
+            mCallback.updateFromResponse(s);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
