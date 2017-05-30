@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="project.skru_dane_po_warszawsku">
-<<<<<<< HEAD
-<uses-permission android:name="android.permission.INTERNET"/>
-=======
+
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
->>>>>>> 42ebea1f023d315294e62f90962c50ba26b5ce9f
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
