@@ -10,10 +10,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-
     }
 
+    defaultConfig {
+        multiDexEnabled true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
 
     buildTypes {
         release {
@@ -22,18 +27,18 @@ android {
         }
     }
 
-        packagingOptions {
-            exclude 'META-INF/DEPENDENCIES.txt'
-            exclude 'META-INF/LICENSE.txt'
-            exclude 'META-INF/NOTICE.txt'
-            exclude 'META-INF/NOTICE'
-            exclude 'META-INF/LICENSE'
-            exclude 'META-INF/DEPENDENCIES'
-            exclude 'META-INF/notice.txt'
-            exclude 'META-INF/license.txt'
-            exclude 'META-INF/dependencies.txt'
-            exclude 'META-INF/LGPL2.1'
-        }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 dependencies {
@@ -42,10 +47,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
-
     compile 'com.google.android.gms:play-services:10.2.6'
- //  compile 'com.google.android.gms:play-services-location:10.2.6'
-
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.8'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.8.8'

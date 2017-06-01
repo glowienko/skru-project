@@ -7,5 +7,6 @@ public class TransportEvents {
     private static final String BROKEN_TICKET_MACHINE = "ip_transportation_004";
     private static final String VEHICLE_BAD_TECHNICAL_CONDITION = "ip_transportation_005";
     private static final String GRAFFITI = "ip_damage_004";
+    private static final String OTHERS_ = "ip_others_001";
 
 }

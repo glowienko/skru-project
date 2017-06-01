@@ -1,9 +1,5 @@
 package project.skru_dane_po_warszawsku.network;
 
-/**
- * Created by jaroslaw on 29.05.2017.
- */
-
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -14,10 +10,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
-
-/**
- * Created by jaroslaw on 24.04.2017.
- */
 
 public class HTTPGetRequest extends AsyncTask<String, Void, String> {
 

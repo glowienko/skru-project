@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private GoogleApiClient googleApiClient;
     private CurrentLocation currentLocation;
 
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    private void downloadVehicles() {
+        HTTPGetRequest httpGetRequest = new HTTPGetRequest(new RequestCallback<String>() {
+            @Override
+            public void updateFromResponse(String response) throws IOException {
+                VehiclesDataHolder dataHolder = objectMapper.readValue(response, VehiclesDataHolder.class);
+                vehicles = dataHolder.getVehicles();
+                System.out.println();
+            }
+        });
+        httpGetRequest.execute(UM_WARSZAWA_BUS_API_URL);
+    }
 
     @Override
     public void onStart() {
@@ -73,18 +87,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if (googleApiClient.isConnected())
             currentLocation.stopLocationUpdates();
-    }
-
-    private void downloadVehicles() {
-
-        HTTPGetRequest httpGetRequest = new HTTPGetRequest(new RequestCallback<String>() {
-            @Override
-            public void updateFromResponse(String response) throws IOException {
-                vehicles = VehiclesDataHolder.getVehiclesFromJson(response);
-                System.out.println();
-            }
-        });
-        httpGetRequest.execute(UM_WARSZAWA_BUS_API_URL);
     }
 
 
