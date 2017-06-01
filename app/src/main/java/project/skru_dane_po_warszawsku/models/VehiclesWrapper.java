@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VehiclesDataHolder {
+public class VehiclesWrapper {
 
     @JsonProperty("result")
     public ArrayList<Vehicle> vehicles;

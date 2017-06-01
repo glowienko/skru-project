@@ -15,39 +15,39 @@ import lombok.Setter;
 public class ComplaintRequestForm {
 
     @JsonProperty(value = "id")
-    String resourceId;
+    private String resourceId;
 
     @JsonProperty(value = "apikey")
-    String apiKey;
+    private String apiKey;
 
-    String description;
+    private String description;
+
+    private String eventType; // from event types. eg. ip_transportation_004
+
+    private String subcategory; //always == transportation
 
     @JsonProperty(value = "street")
-    String eventStreet; //mandatory
+    private String eventStreet;
 
     @JsonProperty(value = "xCoordWGS84")
-    Double latitude; // szerokość geograficzna
+    private Double latitude; // szerokość geograficzna
 
     @JsonProperty(value = "yCoordWGS84")
-    Double longitude; //długość geograficzna
+    private Double longitude; //długość geograficzna
+
+    private Long vehicleNumber;
 
     //============= below not mandatory fields
     @Nullable
-    String eventType; // from event types. eg. ip_transportation_004
+    private String email;
 
     @Nullable
-    String subcategory; //always == transportation
+    private String name;
 
     @Nullable
-    String email; //probably not mandatory
+    private String lastName;
 
     @Nullable
-    String name; //probably not mandatory
-
-    @Nullable
-    String lastName; //probably not mandatory
-
-    @Nullable
-    Integer phoneNumber; // probably not mandatory
+    private Integer phoneNumber;
 
 }
