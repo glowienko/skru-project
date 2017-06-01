@@ -1,7 +1,12 @@
 package project.skru_dane_po_warszawsku.location;
 
 
+import android.location.Location;
+
+import java.util.List;
+
 import lombok.NoArgsConstructor;
+import project.skru_dane_po_warszawsku.models.Vehicle;
 
 /**
  * Class has method which will find in which public transport vehicle is currently user
@@ -10,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClosestVehicleFinder {
 
-    public Long findCurrentUserVehicleNumber() {
+    public Long findCurrentUserVehicleNumber(List<Vehicle> vehicles, Location currentLocation) {
 
         // todo: find the mean of transport ( number of line eg. 10) in which user is currently
 

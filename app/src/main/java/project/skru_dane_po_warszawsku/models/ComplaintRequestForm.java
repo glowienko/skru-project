@@ -5,14 +5,18 @@ import android.support.annotation.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Builder
-public class ComplaintRequestForm {
+@NoArgsConstructor
+public class ComplaintRequestForm implements Serializable {
 
     @JsonProperty(value = "id")
     private String resourceId;
@@ -22,7 +26,7 @@ public class ComplaintRequestForm {
 
     private String description;
 
-    private String eventType; // from event types. eg. ip_transportation_004
+    private String eventTypeCode; // from event types. eg. ip_transportation_004
 
     private String subcategory; //always == transportation
 

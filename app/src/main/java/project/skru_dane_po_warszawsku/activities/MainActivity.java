@@ -16,8 +16,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import project.skru_dane_po_warszawsku.R;
+import project.skru_dane_po_warszawsku.database.ProfilesDatabaseHelper;
 import project.skru_dane_po_warszawsku.location.ClosestVehicleFinder;
 import project.skru_dane_po_warszawsku.location.CurrentLocation;
+import project.skru_dane_po_warszawsku.models.ComplaintRequestForm;
+import project.skru_dane_po_warszawsku.models.UserProfile;
 import project.skru_dane_po_warszawsku.models.Vehicle;
 import project.skru_dane_po_warszawsku.models.VehiclesWrapper;
 import project.skru_dane_po_warszawsku.network.HTTPGetRequest;
@@ -40,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> eventsListAdapter;
 
     private ClosestVehicleFinder vehicleFinder;
+    private ComplaintRequestForm requestForm;
+    private UserProfile userProfile;
+
+    private ProfilesDatabaseHelper dbHelper;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -47,12 +54,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        vehicleFinder = new ClosestVehicleFinder();
         eventsToComplainList = (ListView) findViewById(R.id.eventsList);
-        populateEventsToComplainList();
-        addChoosingEventListener();
+
+        userProfile = dbHelper.getAllProfiles();
+        vehicleFinder = new ClosestVehicleFinder();
         currentLocation = new CurrentLocation(this);
         googleApiClient = currentLocation.buildGoogleApiClient();
+
+        populateEventsToComplainList();
+        addChoosingEventListener();
+        downloadVehicles();
     }
 
     private void addChoosingEventListener() {
@@ -66,8 +77,43 @@ public class MainActivity extends AppCompatActivity {
 
     //users clicked on event and want to make a complaint or intervention is needed
     private void handleUserRequest(String choosenEventName) {
+        requestForm = new ComplaintRequestForm();
 
+        addMandatoryFields(requestForm, choosenEventName);
+        if (userProfile != null) {
+            addAdditionalFields(requestForm);
+        }
 
+        goToSummary(requestForm);
+    }
+
+    private void goToSummary(ComplaintRequestForm requestForm) {
+        Intent summaryIntent =  new Intent(this, SummaryActivity.class);
+        summaryIntent.putExtra("requestForm", requestForm);
+        startActivity(summaryIntent);
+    }
+
+    private void addMandatoryFields(ComplaintRequestForm requestForm, String choosenEventName) {
+        requestForm.setDescription(choosenEventName);
+        requestForm.setApiKey(UM_APIKEY);
+        requestForm.setResourceId("someId");
+        requestForm.setEventTypeCode(InVehicleEvents.eventsMap.get(choosenEventName));
+        requestForm.setSubcategory("transportation");
+
+        Location location = currentLocation.getLocation();
+
+        requestForm.setLatitude(location.getLatitude());
+        requestForm.setLongitude(location.getLongitude());
+        //street name ? :o
+        requestForm.setVehicleNumber(vehicleFinder.findCurrentUserVehicleNumber(vehicles, location));
+
+    }
+
+    private void addAdditionalFields(ComplaintRequestForm requestForm) {
+        requestForm.setName(userProfile.getName());
+        requestForm.setLastName(userProfile.getLastName());
+        requestForm.setEmail(userProfile.getEmail());
+        requestForm.setPhoneNumber(userProfile.getPhoneNumber());
     }
 
     public void goToProfile(View view) {
