@@ -44,9 +44,11 @@ public class ComplaintRequestForm implements Serializable {
 
     private String line;
 
+
     private String brigade;
 
     private String updateTime;
+
 
 
     //============= below not mandatory fields
