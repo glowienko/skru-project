@@ -41,7 +41,7 @@ public class ComplaintRequestForm implements Serializable {
     @JsonProperty(value = "yCoordWGS84")
     private Double longitude; //długość geograficzna
 
-    private Long vehicleNumber;
+    private String line;
 
     //============= below not mandatory fields
     @Nullable
