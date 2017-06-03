@@ -22,12 +22,13 @@
         android:id="@+id/saveProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="381dp"
         android:layout_alignBaseline="@+id/backToMain"
         android:layout_alignBottom="@+id/backToMain"
-        android:layout_alignStart="@+id/phone_number" />
+        android:layout_alignStart="@+id/phone_number"
+        android:onClick="addProfile"
+        android:text="ADD"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="381dp" />
 
     <TextView
         android:id="@+id/textView2"

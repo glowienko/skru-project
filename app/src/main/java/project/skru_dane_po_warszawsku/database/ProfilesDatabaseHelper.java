@@ -28,7 +28,7 @@ public class ProfilesDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
-                "create table " + TABLE_NAME +
+                "create table if not exists " + TABLE_NAME +
                         "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "name TEXT, last_name TEXT, " +
                         "email TEXT, " +
@@ -59,12 +59,11 @@ public class ProfilesDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME,
                 "id = ? ",
-                new String[] { Integer.toString(id) });
+                new String[] { String.valueOf(id) });
     }
 
     //get all just for convenience, may be changed :o we need only one user profile
     public UserProfile getAllProfiles() {
-        UserProfile profile = new UserProfile();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
@@ -79,11 +78,10 @@ public class ProfilesDatabaseHelper extends SQLiteOpenHelper {
             newUserProfile.setPhoneNumber(res.getInt(res.getColumnIndex(PHONE_NUMBER)));
             newUserProfile.setId(res.getInt(res.getColumnIndex("id")));
 
-            profile = newUserProfile;
-            break;
+            return newUserProfile;
 //            res.moveToNext();
         }
-        return profile;
+        return null;
     }
 
 

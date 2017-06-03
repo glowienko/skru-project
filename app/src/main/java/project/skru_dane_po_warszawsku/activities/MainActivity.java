@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         eventsToComplainList = (ListView) findViewById(R.id.eventsList);
 
+        dbHelper = new ProfilesDatabaseHelper(this);
+
         userProfile = dbHelper.getAllProfiles();
         vehicleFinder = new ClosestVehicleFinder();
         currentLocation = new CurrentLocation(this);

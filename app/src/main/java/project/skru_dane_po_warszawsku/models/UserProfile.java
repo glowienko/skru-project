@@ -13,15 +13,11 @@ public class UserProfile {
 
     private Integer id;
 
-    @Nullable
     private String email;
 
-    @Nullable
     private String name;
 
-    @Nullable
     private String lastName;
 
-    @Nullable
     private Integer phoneNumber;
 }

@@ -37,13 +37,21 @@ public class UserProfileActivity extends AppCompatActivity {
         setProfileToFields();
     }
 
+    @Override
+    protected void onResume(){
+        userProfile = dbHelper.getAllProfiles();
+        setProfileToFields();
+
+        super.onResume();
+    }
+
     private void setProfileToFields() {
         if (userProfile != null) {
             try {
                 name.setText(userProfile.getName());
                 lastName.setText(userProfile.getLastName());
                 email.setText(userProfile.getEmail());
-                phoneNumber.setText(userProfile.getPhoneNumber());
+                phoneNumber.setText(userProfile.getPhoneNumber().toString());
             } catch (NullPointerException e) {
                 Log.d("PROFILE", "missing some field in profile");
             }
@@ -56,12 +64,19 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void addProfile(View view) {
+        if (userProfile == null) {
+            userProfile = new UserProfile();
+        }
+
+        dbHelper.deleteProfile(userProfile.getId());
+
         userProfile.setName(String.valueOf(name.getText()));
         userProfile.setLastName(String.valueOf(lastName.getText()));
         userProfile.setEmail(String.valueOf(email.getText()));
         userProfile.setPhoneNumber(Integer.valueOf(String.valueOf(phoneNumber.getText())));
 
         dbHelper.addProfile(userProfile);
+        this.finish();
     }
 
 

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class InVehicleEvents {
     public static final String RECKLESS_DRIVER_COMPLAINT = "Kierowca prowadzi pojazd bardzo niebezpiecznie";
-    private static final String OVERFILLED_VEHICLE_COMPLAINT = "Pojazd jest niesamowicie przepełniony";
+    private static final String OVERFILLED_VEHICLE_COMPLAINT = "Pojazd jest przepełniony";
     private static final String BROKEN_TICKET_MACHINE_COMPLAINT = "Maszyna do biletów nie działa";
     private static final String VEHICLE_BAD_TECHNICAL_CONDITION_COMPLAINT = "Zły stan techniczny pojazdu";
     private static final String GRAFFITI_COMPLAINT = "Dewastacja za pomocą graffiti";

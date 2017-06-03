@@ -37,8 +37,9 @@ public class CurrentLocation implements GoogleApiClient.ConnectionCallbacks, Goo
     private static final String LAST_UPDATED_TIME_STRING_KEY = "last_updated";
     private static final String LOCATION_KEY = "location";
     private static final String REQUESTING_LOCATION_UPDATES_KEY = "request_location_update";
-    private static final Integer LOCATION_PERMISSION_REQUEST_CODE = 200;
 
+
+    private int LOCATION_PERMISSION_REQUEST_CODE;
     private GoogleApiClient googleApiClient;
     private Location bestLocation;
     private LocationRequest locationRequest;
@@ -147,6 +148,7 @@ public class CurrentLocation implements GoogleApiClient.ConnectionCallbacks, Goo
         {
             if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 bestLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+                locationRequest = new LocationRequest();
             }
             startLocationUpdates();
 
