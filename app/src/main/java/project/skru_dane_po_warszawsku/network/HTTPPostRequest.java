@@ -27,10 +27,9 @@ public class HTTPPostRequest extends AsyncTask<String, Void, String> {
         if(!isCancelled() && params != null && params.length > 0) {
             String urlString = params[0];
             String method = params[1];
-            String action = params[2];
-            String data = params[3];
+            String data = params[2];
 
-            String urlToSend = urlString + "?action=" + action;
+            String urlToSend = urlString;
             try {
                 URL url = new URL(urlToSend);
                 result = requestUrl(url, method, data);

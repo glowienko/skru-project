@@ -33,9 +33,6 @@ public class ComplaintRequestForm implements Serializable {
 
     private String subcategory; //always == transportation
 
-    @JsonProperty(value = "street")
-    private String eventStreet;
-
     @JsonProperty(value = "xCoordWGS84")
     private Double latitude; // szerokość geograficzna
 

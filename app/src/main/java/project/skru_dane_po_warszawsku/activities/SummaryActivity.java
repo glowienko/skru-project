@@ -6,17 +6,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+
+import lombok.SneakyThrows;
 import project.skru_dane_po_warszawsku.R;
 import project.skru_dane_po_warszawsku.models.ComplaintRequestForm;
+import project.skru_dane_po_warszawsku.network.HTTPPostRequest;
+import project.skru_dane_po_warszawsku.network.RequestCallback;
 
 public class SummaryActivity extends AppCompatActivity {
 
+
+    private static final String url = "https://apibaas-trial.apigee.net/GASitAPP/skru/complaints";
     ComplaintRequestForm requestForm;
 
     TextView description;
-    TextView street;
     TextView coordinates;
-    TextView vehicleNumber;
+    TextView line;
+    TextView brigade;
 
 
     @Override
@@ -28,26 +38,35 @@ public class SummaryActivity extends AppCompatActivity {
         requestForm = (ComplaintRequestForm) withRequestFormIntent.getSerializableExtra("requestForm");
 
         description = (TextView) findViewById(R.id.description);
-        street = (TextView) findViewById(R.id.street);
         coordinates = (TextView) findViewById(R.id.coordinates);
-        vehicleNumber = (TextView) findViewById(R.id.vehicleNumber);
+        line = (TextView) findViewById(R.id.line);
+        brigade = (TextView) findViewById(R.id.brigade);
 
         fillTextFieldsInUi();
     }
 
     private void fillTextFieldsInUi() {
         description.setText(requestForm.getDescription());
-        street.setText(requestForm.getEventStreet());
         coordinates.setText("( " + requestForm.getLatitude().toString() + ", " + requestForm.getLongitude().toString() + ")");
-        vehicleNumber.setText(requestForm.getLine().toString());
+        brigade.setText(requestForm.getBrigade());
+        line.setText(requestForm.getLine());
     }
 
+    @SneakyThrows(JsonProcessingException.class)
     public void sendRequest(View view) {
-        //METHOD WIRED TO THE BUTTON
-        // HERE SHOULD BE  REQUEST WITH COMPLIANT
+        HTTPPostRequest httpPostRequest = new HTTPPostRequest(new RequestCallback<String>() {
+            @Override
+            public void updateFromResponse(String response) throws IOException {
+                String responseCode = response;
+                finish();
+            }
+        });
+        ObjectMapper objectMapper = new ObjectMapper();
+        httpPostRequest.execute(url, "POST", objectMapper.writeValueAsString(requestForm));
+
     }
 
     public void rollbackComplaint(View view) {
-        this.finish();
+        finish();
     }
 }

@@ -65,14 +65,14 @@ public class MainActivity extends AppCompatActivity {
 
         populateEventsToComplainList();
         addChoosingEventListener();
-        downloadVehicles();
     }
 
     private void addChoosingEventListener() {
         eventsToComplainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                handleUserRequest((String) adapter.getItemAtPosition(position));
+                String eventDescription = (String) adapter.getItemAtPosition(position);
+                downloadVehicles(eventDescription);
             }
         });
     }
@@ -132,18 +132,12 @@ public class MainActivity extends AppCompatActivity {
         eventsToComplainList.setAdapter(eventsListAdapter);
     }
 
-
-    public void test(View view) {
-        Location location = currentLocation.getLocation();
-        downloadVehicles();
-    }
-
-    private void downloadVehicles() {
+    private void downloadVehicles(final String eventDescription) {
         HTTPGetRequest httpGetRequest = new HTTPGetRequest(new RequestCallback<String>() {
             @Override
             public void updateFromResponse(String response) throws IOException {
                 vehicles = objectMapper.readValue(response, VehiclesWrapper.class).getVehicles();
-                System.out.println();
+                handleUserRequest(eventDescription);
             }
         });
         httpGetRequest.execute(UM_WARSZAWA_BUS_API_URL);
