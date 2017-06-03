@@ -28,6 +28,7 @@ public class ComplaintRequestForm implements Serializable {
 
     private String description;
 
+    @JsonProperty(value = "event")
     private String eventTypeCode; // from event types. eg. ip_transportation_004
 
     private String subcategory; //always == transportation
@@ -41,7 +42,12 @@ public class ComplaintRequestForm implements Serializable {
     @JsonProperty(value = "yCoordWGS84")
     private Double longitude; //długość geograficzna
 
-    private Long vehicleNumber;
+    private String line;
+
+    private String brigade;
+
+    private String updateTime;
+
 
     //============= below not mandatory fields
     @Nullable

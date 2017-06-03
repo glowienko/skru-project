@@ -106,8 +106,11 @@ public class MainActivity extends AppCompatActivity {
 
         requestForm.setLatitude(location.getLatitude());
         requestForm.setLongitude(location.getLongitude());
-        //street name ? :o
-        requestForm.setVehicleNumber(vehicleFinder.findCurrentUserVehicleNumber(vehicles, location));
+
+        Vehicle vehicle = ClosestVehicleFinder.findCurrentUserVehicleNumber(vehicles, currentLocation.getLocation());
+        requestForm.setLine(vehicle.getLine());
+        requestForm.setBrigade(vehicle.getBrigade());
+        requestForm.setUpdateTime(vehicle.getUpdateTime());
 
     }
 

@@ -1,6 +1,7 @@
 package project.skru_dane_po_warszawsku.location;
 
 
+
 import android.location.Location;
 
 import java.util.List;
@@ -15,10 +16,20 @@ import project.skru_dane_po_warszawsku.models.Vehicle;
 @NoArgsConstructor
 public class ClosestVehicleFinder {
 
-    public Long findCurrentUserVehicleNumber(List<Vehicle> vehicles, Location currentLocation) {
+    public static Vehicle findCurrentUserVehicleNumber(List<Vehicle> vehicles, Location currentLocation) {
 
-        // todo: find the mean of transport ( number of line eg. 10) in which user is currently
 
-        return Long.valueOf(10);
+        Vehicle nearestVehicle = null;
+        float shortestDistance = -1;
+        for (Vehicle vehicle : vehicles) {
+            float distance = currentLocation.distanceTo(vehicle.getLocation());
+
+            if (shortestDistance == -1 || distance < shortestDistance) {
+                shortestDistance = distance;
+                nearestVehicle = vehicle;
+            }
+        }
+        return nearestVehicle;
+
     }
 }
