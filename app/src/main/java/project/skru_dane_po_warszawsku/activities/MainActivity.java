@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToSummary(ComplaintRequestForm requestForm) {
-        Intent summaryIntent =  new Intent(this, SummaryActivity.class);
+        Intent summaryIntent = new Intent(this, SummaryActivity.class);
         summaryIntent.putExtra("requestForm", requestForm);
         startActivity(summaryIntent);
     }

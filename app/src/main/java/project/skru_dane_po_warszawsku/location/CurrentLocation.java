@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -149,6 +150,7 @@ public class CurrentLocation implements GoogleApiClient.ConnectionCallbacks, Goo
             if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 bestLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
                 locationRequest = new LocationRequest();
+
             }
             startLocationUpdates();
 
@@ -156,8 +158,10 @@ public class CurrentLocation implements GoogleApiClient.ConnectionCallbacks, Goo
     }
 
     @Override
-    public void onConnectionSuspended(int i) {}
+    public void onConnectionSuspended(int i) {
+    }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
 }
